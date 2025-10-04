@@ -1,101 +1,44 @@
-# Airbnb Insights: Price and Review Prediction
+# Airbnb Insights
 
-A machine learning project analyzing Airbnb listings from Italian cities (Florence, Naples, and Venice) to predict listing prices and review scores using XGBoost regression models.
+Machine learning analysis of Airbnb listings in Florence, Naples, and Venice to predict prices and review scores, identifying key amenities and factors affecting listing success.
 
 ## Overview
 
-This project uses the InsideAirbnb dataset to identify key factors affecting Airbnb listing prices and customer satisfaction. The analysis focuses on amenities, location features, and host characteristics to build predictive models.
+**Goal:** Predict listing prices and customer satisfaction (review scores) using property features and amenities.
 
-**Key Objectives:**
-- Predict listing prices based on property features and amenities
-- Predict review scores to understand customer satisfaction drivers
-- Analyze the importance of different amenities across Italian cities
+**Dataset:** InsideAirbnb September 2023 data for three Italian cities (~5,000 listings, 75+ features).
 
-## Dataset
+**Methods:** XGBoost regression models for price and review prediction, with city-specific models.
 
-- **Source:** InsideAirbnb (September 2023)
-- **Cities:** Florence, Naples, Venice
-- **Features:** 75+ attributes including amenities, location, property type, host information, and availability
+## Key Components
 
-## Methodology
+**Feature Engineering:**
+- Binary encoding for 95+ amenity types
+- Distance to city center calculation
+- Host verification and response metrics
+- Property type and room type encoding
 
-### 1. Data Preprocessing
-- Consolidated data from three Italian cities
-- Handled missing values and removed sparse columns
-- Combined over 5,000 listings into unified dataset
-
-![Missing Values Analysis](figures/missing_values.png)
-
-### 2. Feature Engineering
-Created new features to enhance model performance:
-- **Amenities encoding:** Binary features for 95+ amenity types (WiFi, kitchen, pool, etc.)
-- **Distance to city center:** Calculated using latitude/longitude coordinates
-- **Host metrics:** Response time, verification status, listing count
-- **Availability features:** Seasonal availability patterns
-- **Categorical encoding:** Property type, room type, neighborhood
-
-![Price Distribution](figures/price_distribution.png)
-
-### 3. Feature Selection
-- Correlation analysis to identify relationships between features
-- Removed highly correlated features to prevent multicollinearity
-- Selected most impactful features for modeling
-
-![Correlation Analysis](figures/correlation_heatmap_2.png)
-
-### 4. Modeling
-
-**Price Prediction:**
-- XGBoost regression model (primary)
-- Linear regression baseline (for comparison)
-- Log-transformed target variable for better performance
-- Individual models trained per city for localized predictions
-
-**Review Score Prediction:**
-- XGBoost regression for overall rating
-- Separate models for rating dimensions (accuracy, cleanliness, location, etc.)
-- City-specific models to capture regional preferences
+**Models:**
+- Price prediction: XGBoost with log-transformed target
+- Review prediction: XGBoost for overall rating and individual dimensions
+- Separate models per city for localized predictions
 
 ## Key Findings
 
-- **Amenities matter:** Certain amenities (WiFi, kitchen, parking) significantly impact pricing
-- **Location is crucial:** Distance to city center strongly correlates with price
-- **Property type effects:** Entire homes command higher prices than shared rooms
-- **Host factors:** Superhost status and response time influence reviews
-
-## Technologies Used
-
-- **Python 3.x**
-- **Libraries:** pandas, scikit-learn, XGBoost, matplotlib, seaborn, missingno
-- **Environment:** Google Colab
-
-## Project Structure
-
-```
-Airbnb-Insights/
-├── FinalProject_351.ipynb    # Main analysis notebook
-├── figures/                   # Visualizations and plots
-├── LICENSE                    # GPL-3.0 License
-└── README.md                  # This file
-```
+- Amenities (WiFi, kitchen, parking) significantly impact pricing
+- Distance to city center strongly correlates with price
+- Entire homes command higher prices than shared rooms
+- Superhost status and response time influence reviews
+- City-specific models outperform unified model
 
 ## Usage
 
-1. Open `FinalProject_351.ipynb` in Google Colab or Jupyter
-2. Upload the InsideAirbnb dataset CSV files for Florence, Naples, and Venice
-3. Run cells sequentially to reproduce the analysis
-4. Models will be trained and evaluated automatically
+Open `FinalProject_351.ipynb` in Google Colab, upload the InsideAirbnb CSV files for the three cities, and run cells sequentially.
 
-## Results
-
-The XGBoost models significantly outperformed linear baseline models for both price and review prediction tasks. City-specific models showed improved performance compared to a single unified model, suggesting regional variations in pricing and guest preferences.
+**Technologies:** Python, pandas, scikit-learn, XGBoost, matplotlib, seaborn
 
 ## License
 
-This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
+GNU General Public License v3.0 - see [LICENSE](LICENSE)
 
-## Acknowledgments
-
-- Data provided by [InsideAirbnb](http://insideairbnb.com/)
-- CMPE 351 Final Project - Queen's University
-- Group 10
+**CMPE 351 Final Project - Queen's University, Group 10**
